@@ -1,7 +1,7 @@
 {
   "name": "@seagull/code-build-tools",
   "version": "0.1.0",
-  "description": "Scaffolding capabilities and AST transforms for seagull apps",
+  "description": "custom seagull building/bundling/transforms tools",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.js",
   "scripts": {

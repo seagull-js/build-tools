@@ -13,10 +13,7 @@ import { sleep } from 'villa'
 import { Bundler } from '../../src/bundler'
 import { Compiler } from '../../src/compiler'
 import { log } from '../../src/helper'
-import {
-  addImportIndexFile,
-  modifyScriptExports,
-} from '../../src/transforms'
+import { addImportIndexFile, modifyScriptExports } from '../../src/transforms'
 import FunctionalTest from '../helper/functional_test'
 
 import * as shell from 'shelljs'

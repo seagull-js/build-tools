@@ -8,7 +8,7 @@ const cwd = shell.pwd().toString()
 const appName = '__tmp__'
 const appDir = join(cwd, appName)
 
-const create = (name) => {
+const create = name => {
   const app = new App(name)
   app.toFolder(appDir)
 }
@@ -51,5 +51,3 @@ export default class UnitTest {
   create = create
   addPage = addPage
 }
-
-

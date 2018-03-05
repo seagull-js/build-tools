@@ -16,7 +16,7 @@ export class Compiler {
   // incremental tsc compiling does only support syntactic checking
   static compile() {
     shell.config.fatal = true
-    shell.exec(`${binPath('tsc')}`)
+    shell.exec(`tsc`)
   }
 
   private conf: ts.ParsedCommandLine

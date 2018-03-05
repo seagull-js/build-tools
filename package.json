@@ -1,6 +1,6 @@
 {
     "name": "@seagull/build-tools",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "custom seagull building, bundling, transforms tools",
     "main": "dist/src/index.js",
     "types": "dist/src/index.d.js",
@@ -11,7 +11,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/seagull-js/code-build-tools.git"
+        "url": "git+https://github.com/seagull-js/build-tools.git"
     },
     "author": "Tom Jaster <info@tjaster.me>",
     "license": "LGPL-3.0",

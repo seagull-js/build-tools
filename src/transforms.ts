@@ -4,13 +4,23 @@ import * as dir from 'node-dir'
 import { basename, join } from 'path'
 import * as shell from 'shelljs'
 
+const jsInPath = path => {
+  try {
+    return dir
+      .files('.seagull/dist/backend/api', { sync: true })
+      .filter(file => /\.js$/.test(file))
+  } catch {
+    return []
+  }
+}
+
 export function modifyScriptExports(): void {
-  const files = dir
-    .files('.seagull/dist/backend/api', { sync: true })
-    .filter(file => /\.js$/.test(file))
+  const apis = jsInPath('.seagull/dist/backend/api')
+  const jobs = jsInPath('.seagull/dist/backend/jobs')
   const from = /exports\.default = (\w+);/
   const to = 'exports.default = $1;\nexports.handler = $1.dispatch.bind($1);'
-  shell.sed('-i', from, to, files)
+  shell.sed('-i', from, to, apis)
+  shell.sed('-i', from, to, jobs)
 }
 
 export function addImportIndexFile(): void {

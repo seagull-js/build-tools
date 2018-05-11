@@ -1,5 +1,5 @@
 import { existsSync, readFileSync, writeFileSync } from 'fs'
-import { set } from 'lodash'
+import { set, noop } from 'lodash'
 import * as dir from 'node-dir'
 import { basename, join } from 'path'
 import * as shell from 'shelljs'
@@ -8,7 +8,7 @@ const jsInPath = path => {
   try {
     return dir.files(path, { sync: true }).filter(file => /\.js$/.test(file))
   } catch {
-    return []
+    return
   }
 }
 
@@ -17,8 +17,8 @@ export function modifyScriptExports(): void {
   const jobs = jsInPath('.seagull/dist/backend/jobs')
   const from = /exports\.default = (\w+);/
   const to = 'exports.default = $1;\nexports.handler = $1.dispatch.bind($1);'
-  shell.sed('-i', from, to, apis)
-  shell.sed('-i', from, to, jobs)
+  apis ? shell.sed('-i', from, to, apis) : noop()
+  jobs ? shell.sed('-i', from, to, jobs) : noop()
 }
 
 export function addImportIndexFile(): void {

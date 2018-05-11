@@ -6,9 +6,7 @@ import * as shell from 'shelljs'
 
 const jsInPath = path => {
   try {
-    return dir
-      .files('.seagull/dist/backend/api', { sync: true })
-      .filter(file => /\.js$/.test(file))
+    return dir.files(path, { sync: true }).filter(file => /\.js$/.test(file))
   } catch {
     return []
   }

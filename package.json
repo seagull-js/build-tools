@@ -1,6 +1,6 @@
 {
   "name": "@seagull/build-tools",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "custom seagull building, bundling, transforms tools",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.js",
@@ -16,6 +16,8 @@
   "author": "Tom Jaster <info@tjaster.me>",
   "license": "LGPL-3.0",
   "devDependencies": {
+    "@seagull/code-generators": "0.2.4",
+    "@seagull/core": "0.8.0",
     "@types/chai": "^4.1.2",
     "@types/lodash": "^4.14.103",
     "@types/mocha": "^2.2.48",
@@ -29,11 +31,13 @@
     "tsconfig-paths": "^3.1.1",
     "tslint": "^5.9.1",
     "tslint-config-prettier": "^1.8.0",
-    "typescript": "^2.7.2",
-    "@seagull/code-generators": "0.2.4",
-    "@seagull/core": "0.8.0"
+    "typescript": "2.8"
   },
   "dependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babelify": "^8.0.0",
     "browserify": "^14.4.0",
     "browserify-incremental": "3.1.1",
     "lodash": "^4.17.5",
@@ -45,7 +49,7 @@
     "villa": "^0.3.1"
   },
   "peerDependencies": {
-    "typescript": "^2.7.2",
+    "typescript": "2.7.2",
     "@seagull/code-generators": "^0.3.0"
   }
 }

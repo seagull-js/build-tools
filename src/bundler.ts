@@ -17,9 +17,27 @@ const entry = join(
   'entry.js'
 )
 
+const addBabelTransform = (bfy: any, minify: boolean) => {
+  return minify || process.env.BABEL
+    ? bfy.transform('babelify', {
+        global: true,
+        presets: [
+          [
+            'env',
+            {
+              targets: {
+                browsers: ['last 2 versions', 'safari >= 7', 'ie >= 11'],
+              },
+            },
+          ],
+        ],
+      })
+    : bfy
+}
+
 export class Bundler {
   static async bundle(minify = false) {
-    const bfy = browserify({ ignoreMissing: true })
+    const bfy = addBabelTransform(browserify({ ignoreMissing: true }), minify)
     const stream = bfy.add(join(process.cwd(), entry)).bundle()
     const bundle = minify
       ? UglifyJS.minify(await streamToString(stream)).code
@@ -47,7 +65,7 @@ export class Bundler {
       packageCache: this.incrementalPackageCache,
     }
 
-    this.browserify = browserify(browserifyArgs)
+    this.browserify = addBabelTransform(browserify(browserifyArgs), this.minify)
     this.browserifyIncremental = browserifyIncremental(this.browserify)
     this.browserify.add(join(process.cwd(), entry))
     this.browserify.on('time', time => {

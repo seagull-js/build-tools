@@ -2,4 +2,5 @@
 --require tsconfig-paths/register
 --watch-extensions ts
 --recursive
+--bail
 test/**/*.ts

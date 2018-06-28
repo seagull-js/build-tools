@@ -17,8 +17,10 @@ const entry = join(
   'entry.js'
 )
 
+const useBabel = (minify: boolean) => minify || process.env.BABEL
+
 const addBabelTransform = (bfy: any, minify: boolean) => {
-  return minify || process.env.BABEL
+  return useBabel(minify)
     ? bfy.transform('babelify', {
         global: true,
         presets: [
@@ -37,7 +39,13 @@ const addBabelTransform = (bfy: any, minify: boolean) => {
 
 export class Bundler {
   static async bundle(minify = false) {
-    const bfy = addBabelTransform(browserify({ ignoreMissing: true }), minify)
+    const bfy = addBabelTransform(
+      browserify({
+        ignoreMissing: true,
+        require: useBabel(minify) ? ['babel-polyfill'] : [],
+      }),
+      minify
+    )
     const stream = bfy.add(join(process.cwd(), entry)).bundle()
     const bundle = minify
       ? UglifyJS.minify(await streamToString(stream)).code
@@ -63,6 +71,7 @@ export class Bundler {
       fullPaths: true,
       ignoreMissing: true,
       packageCache: this.incrementalPackageCache,
+      require: useBabel(this.minify) ? ['babel-polyfill'] : [],
     }
 
     this.browserify = addBabelTransform(browserify(browserifyArgs), this.minify)

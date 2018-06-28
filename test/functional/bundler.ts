@@ -70,6 +70,30 @@ class CompilerBuilderTest extends FunctionalTest {
   }
 
   @slow(5000)
+  @timeout(60000)
+  @test
+  async 'can bundle a project with babel polyfill'() {
+    const entry = join(
+      process.cwd(),
+      '.seagull',
+      'node_modules',
+      '@seagull',
+      'core',
+      'dist',
+      'lib',
+      'spa',
+      'entry.js'
+    )
+
+    this.addPage('SomePage', { path: '/some_url' })
+    compileAndModifySteps()
+    expect(existsSync(this.bundlePath)).to.be.equal(false)
+    const bundle = await new Bundler(true).bundle()
+    // tslint:disable-next-line:no-unused-expression
+    expect(bundle.indexOf('._babelPolyfill=!0') > -1).to.be.true
+  }
+
+  @slow(5000)
   @timeout(30000)
   @test
   async 'can bundle a project dynamicly'() {

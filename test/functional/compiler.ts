@@ -22,6 +22,7 @@ class CompilerBuilderTest extends FunctionalTest {
   @test
   async 'can compile a file staticly'() {
     this.addPage('SomePage', { path: '/some_url' })
+    this.addComponent('SomePage')
     Compiler.compile()
     const file = join(
       this.appDir,
@@ -31,7 +32,16 @@ class CompilerBuilderTest extends FunctionalTest {
       'pages',
       'SomePage.js'
     )
+    const component = join(
+      this.appDir,
+      '.seagull',
+      'dist',
+      'frontend',
+      'component',
+      'SomePage.js'
+    )
     expect(existsSync(file)).to.be.equal(true)
+    expect(existsSync(component)).to.be.equal(true)
   }
 
   @slow(5000)

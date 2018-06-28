@@ -1,4 +1,8 @@
-import { App, generatePage } from '@seagull/code-generators'
+import {
+  App,
+  generateComponentTsx,
+  generatePage,
+} from '@seagull/code-generators'
 import { context } from 'mocha-typescript'
 import * as mockFS from 'mock-fs'
 import { join } from 'path'
@@ -20,6 +24,14 @@ const addPage = (name, options) => {
   gen.toFile(dest)
 }
 
+const addComponent = (name) => {
+  const gen = generateComponentTsx(name, true)
+  const pwd = shell.pwd().toString()
+  const dest = join(pwd, 'frontend', 'components', `${name}.tsx`)
+  shell.mkdir('-p', join(pwd, 'frontend', 'components'))
+  gen.toFile(dest)
+}
+
 export default class UnitTest {
   // static local variables
   static cwd = cwd
@@ -28,6 +40,7 @@ export default class UnitTest {
 
   static create = create
   static addPage = addPage
+  static addComponent = addComponent
 
   static before() {
     shell.cd(cwd)
@@ -50,4 +63,5 @@ export default class UnitTest {
   appDir = appDir
   create = create
   addPage = addPage
+  addComponent = addComponent
 }

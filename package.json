@@ -1,6 +1,6 @@
 {
   "name": "@seagull/build-tools",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "custom seagull building, bundling, transforms tools",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.js",
@@ -16,7 +16,7 @@
   "author": "Tom Jaster <info@tjaster.me>",
   "license": "LGPL-3.0",
   "devDependencies": {
-    "@seagull/code-generators": "0.2.4",
+    "@seagull/code-generators": "0.5.1",
     "@seagull/core": "0.8.0",
     "@types/chai": "^4.1.2",
     "@types/lodash": "^4.14.103",
@@ -50,6 +50,6 @@
   },
   "peerDependencies": {
     "typescript": "2.7.2",
-    "@seagull/code-generators": "^0.3.0"
+    "@seagull/code-generators": "^0.5.1"
   }
 }

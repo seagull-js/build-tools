@@ -19,6 +19,7 @@ import FunctionalTest from '../helper/functional_test'
 @suite('builder::compiler')
 class CompilerBuilderTest extends FunctionalTest {
   @slow(5000)
+  @timeout(60000)
   @test
   async 'can compile a file staticly'() {
     this.addPage('SomePage', { path: '/some_url' })
@@ -37,7 +38,7 @@ class CompilerBuilderTest extends FunctionalTest {
       '.seagull',
       'dist',
       'frontend',
-      'component',
+      'components',
       'SomePage.js'
     )
     expect(existsSync(file)).to.be.equal(true)
